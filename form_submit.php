@@ -33,6 +33,7 @@ use Aws\Exception\AwsException;
  */
 
 // Create a Secrets Manager Client 
+$client = new SecretsManagerClient(['profile' => 'default','version' => '2017-10-17', 'region' => 'us-east-1']);
 try {
     $result = $client->getSecretValue([
         'SecretId' => $secretName,
