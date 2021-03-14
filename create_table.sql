@@ -1,4 +1,4 @@
-create table test(
+create table if not exists test (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255),
     email varchar(255),
