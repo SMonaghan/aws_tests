@@ -74,7 +74,7 @@ if (isset($result['SecretString'])) {
 } else {
     $secret = base64_decode($result['SecretBinary']);
 }
-$password = $secret['password']
+$password = $secret['password'];
 $connection = null;
 try{
 $connection = new PDO("mysql:host=" . $host . ";dbname=" . $db_name, $username, $password);
