@@ -83,7 +83,7 @@ echo $result;
 else{
 echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
 }
-$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+$myfile = fopen("log.log", "w") or die("Unable to open file!");
 $txt = $name;
 fwrite($myfile, $txt);
 fclose($myfile);
