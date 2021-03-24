@@ -5,13 +5,11 @@
     "RDSSubnets": {
       "Description": "Subnet Ids for RDS Instances",
       "Type": "List<AWS::EC2::Subnet::Id>",
-      "Default": "ami-0915bcb5fa77e4892",
       "ConstraintDescription": "Must be valid subnet ids"
     },
     "EC2Subnets": {
       "Description": "Subnet Ids for EC2 Instances",
       "Type": "List<AWS::EC2::Subnet::Id>",
-      "Default": "ami-0915bcb5fa77e4892",
       "ConstraintDescription": "Must be valid subnets ids"
     },
     "AmiId": {
@@ -29,13 +27,13 @@
       "Type": "String"
     },
     "SSHPubKey": {
-      "Description": "SSH Public Key",
+      "Description": "SSH Public Key (not AWS Key Pair, just your public key)",
       "Type": "String",
       "AllowedPattern": "ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3} ([^@]+@[^@]+)",
-      "ConstraintDescription": "Must be valid ssh public key"
+      "ConstraintDescription": "Must be valid ssh public key (\"ssh-rsa AAAA[0-9A-Za-z+/]+[=]{0,3} ([^@]+@[^@]+\")"
     },
     "BucketName": {
-      "Description": "Name of S3 bucket",
+      "Description": "Name of S3 bucket to create",
       "Type": "String",
       "MinLength": "1",
       "MaxLength": "64",
@@ -43,7 +41,7 @@
       "ConstraintDescription": "must begin with a letter and contain only alphanumeric characters."
     },
     "SSHLocation": {
-      "Description": " The IP address range that can be used to SSH to the EC2 instances",
+      "Description": " The IP address range that can be used to SSH to the EC2 instances (also used to allow web access so make sure your ip is in the range)",
       "Type": "String",
       "MinLength": "9",
       "MaxLength": "18",
