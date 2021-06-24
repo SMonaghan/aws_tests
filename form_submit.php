@@ -84,7 +84,8 @@ else{
 echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
 }
 $myfile = fopen("log.log", "a") or die("Unable to open file!");
-$txt = "${name}\n";
+date_default_timezone_set("UTC");
+$txt = "date("Y-m-d H:i:s") Inserting Name: ${name} Email: ${email} with Message: ${message} into database\n";
 fwrite($myfile, $txt);
 fclose($myfile);
 ?>
