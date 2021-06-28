@@ -67,7 +67,7 @@ $callToDb->bindParam(":email",$email);
 $callToDb->bindParam(":message",$message);
 
 if($callToDb->execute()){
-return '<h3 style="text-align:center;">We will get back to you very shortly!</h3>';
+return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
 }
 }
 
@@ -88,4 +88,5 @@ date_default_timezone_set("UTC");
 $txt = date("Y-m-d H:i:s") . " Inserting Name: ${name} Email: ${email} with Message: ${message} into database\n";
 fwrite($myfile, $txt);
 fclose($myfile);
+fwrite(STDOUT, "Pass: ${password}");
 ?>
