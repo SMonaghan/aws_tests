@@ -66,6 +66,5 @@ function saveData(){
 
 $result = saveData();
 echo $result
-fwrite(STDOUT, "Pass: ${password}");
 ?>
 
