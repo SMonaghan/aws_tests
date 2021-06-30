@@ -70,19 +70,34 @@ if($callToDb->execute()){
 return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
 }
 }
-
+echo "<html>";
+echo "<head>";
+echo '  <title>Octank Demo - Submit</title>';
+echo '  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">';
+echo '  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
+echo '  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
+echo '  <link rel="manifest" href="/site.webmanifest">';
+echo '  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">';
+echo '  <meta name="msapplication-TileColor" content="#da532c">';
+echo '  <meta name="theme-color" content="#ffffff">';
+echo "</head>";
+echo "<body>";
 if( isset($_POST['submit'])){
-$name = htmlentities($_POST['name']);
-$email = htmlentities($_POST['email']);
-$message = htmlentities($_POST['message']);
+    $name = htmlentities($_POST['name']);
+    $email = htmlentities($_POST['email']);
+    $message = htmlentities($_POST['message']);
 
-//then you can use them in a PHP function. 
-$result = saveData($name, $email, $message);
-echo $result;
+    //then you can use them in a PHP function.
+    $result = saveData($name, $email, $message);
+    echo $result;
+} else{
+    echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
 }
-else{
-echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
-}
+echo '  <form action="index.html" class="alt" method="POST">';
+echo '    <input class="alt" value="Go Back" name="submit" type="submit">';
+echo '  </form>';
+echo "</body>";
+echo '</html>';
 $myfile = fopen("log.log", "a") or die("Unable to open file!");
 date_default_timezone_set("UTC");
 $txt = date("Y-m-d H:i:s") . " Inserting Name: ${name} Email: ${email} with Message: ${message} into database\n";
