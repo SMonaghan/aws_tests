@@ -169,6 +169,7 @@
                 [
                   "#!/bin/bash -xe\n",
                   "export HOME='/root'\n",
+                  "yum install amazon-cloudwatch-agent -y\n",
                   "yum install -y aws-cfn-bootstrap\n",
                   "mkdir -p ~ec2-user/.ssh/\n",
                   "echo \"",
@@ -183,6 +184,7 @@
                   "/root/code/composer_install.sh\n",
                   "mv composer.phar /usr/local/bin/composer\n",
                   "/usr/local/bin/composer require aws/aws-sdk-php -d /var/www/html/\n",
+                  "/usr/bin/cp ~/code/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json\n",
                   "/usr/bin/cp ~/code/form.html /var/www/html/index.html\n",
                   "/usr/bin/cp ~/code/form_submit.php /var/www/html/form_submit.php\n",
                   "/usr/bin/cp ~/code/form_get.php /var/www/html/form_get.php\n",
@@ -226,6 +228,11 @@
                   "touch /var/www/html/log.log\n",
                   "chown apache:root /var/www/html/log.log\n",
                   "systemctl start httpd\n",
+                  "systemctl enable httpd\n",
+                  "curl -O https://inspector-agent.amazonaws.com/linux/latest/install\n",
+                  "sudo bash install\n",
+                  "systemctl start amazon-cloudwatch-agent.service\n",
+                  "systemctl enable amazon-cloudwatch-agent.service\n",
                   "\n"
                 ]
               ]
