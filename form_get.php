@@ -41,7 +41,7 @@ $result = shell_exec($cmd);
 $result = json_decode($result, true);
 echo "<html>";
 echo "<head>";
-echo '  <title>Octank Demo - EC2</title>';
+echo '  <title>Octank Demo - Get Data</title>';
 echo '  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">';
 echo '  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
 echo '  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
