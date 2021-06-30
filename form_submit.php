@@ -94,7 +94,10 @@ if( isset($_POST['submit'])){
     echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
 }
 echo '  <form action="/" class="alt" method="POST">';
-echo '    <input class="alt" value="Go Back" name="submit" type="submit">';
+echo '    <input class="alt" value="Go Back" name="go-back" type="submit">';
+echo '  </form>';
+echo '  <form action="/form_get.php" class="alt" method="POST">';
+echo '    <input class="alt" value="See Submitted Data" name="see-data" type="submit">';
 echo '  </form>';
 echo "</body>";
 echo '</html>';
