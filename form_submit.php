@@ -47,28 +47,28 @@ if (isset($result['SecretString'])) {
 }
 $password = json_decode($secret, true)['password'];
 $connection = null;
-try{
-$connection = new PDO("mysql:host=" . $host . ";dbname=" . $db_name, $username, $password);
-$connection->exec("set names utf8");
-}catch(PDOException $exception){
-echo "Connection error: " . $exception->getMessage();
+try {
+    $connection = new PDO("mysql:host=" . $host . ";dbname=" . $db_name, $username, $password);
+    $connection->exec("set names utf8");
+} catch(PDOException $exception) {
+    echo "Connection error: " . $exception->getMessage();
 }
 
-function saveData($name, $email, $message){
-global $connection;
-$query = "INSERT INTO test(name, email, message) VALUES( :name, :email, :message)";
+function saveData($name, $email, $message) {
+    global $connection;
+    $query = "INSERT INTO test(name, email, message) VALUES( :name, :email, :message)";
 
-$callToDb = $connection->prepare( $query );
-$name=htmlspecialchars(strip_tags($name));
-$email=htmlspecialchars(strip_tags($email));
-$message=htmlspecialchars(strip_tags($message));
-$callToDb->bindParam(":name",$name);
-$callToDb->bindParam(":email",$email);
-$callToDb->bindParam(":message",$message);
+    $callToDb = $connection->prepare( $query );
+    $name=htmlspecialchars(strip_tags($name));
+    $email=htmlspecialchars(strip_tags($email));
+    $message=htmlspecialchars(strip_tags($message));
+    $callToDb->bindParam(":name",$name);
+    $callToDb->bindParam(":email",$email);
+    $callToDb->bindParam(":message",$message);
 
-if($callToDb->execute()){
-return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
-}
+    if($callToDb->execute()){
+        return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
+    }
 }
 echo "<html>";
 echo "<head>";
