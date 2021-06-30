@@ -75,7 +75,7 @@ function saveData(){
         }
 }
 
-echo '  <form action="index.html" class="alt" method="POST">';
+echo '  <form action="/" class="alt" method="POST">';
 echo '    <input class="alt" value="Go Back" name="submit" type="submit">';
 echo '  </form>';
 echo "</body>";
