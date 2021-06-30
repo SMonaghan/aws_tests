@@ -1,0 +1,41 @@
+{
+   "containerDefinitions": [ 
+      { 
+         
+         "command": [
+            "/bin/sh -c \"/usr/sbin/httpd -D FOREGROUND\""
+         ],
+         "entryPoint": [
+            "sh",
+            "-c"
+         ],
+         "essential": true,
+         "image": "722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest",
+         "logConfiguration": { 
+            "logDriver": "awslogs",
+            "options": { 
+               "awslogs-group" : "/ecs/lamp",
+               "awslogs-region": "us-east-1",
+               "awslogs-stream-prefix": "ecs"
+            }
+         },
+         "name": "fargate-lamp-demonstration",
+         "portMappings": [ 
+            { 
+               "containerPort": 80,
+               "hostPort": 80,
+               "protocol": "tcp"
+            }
+         ]
+      }
+   ],
+   "cpu": "256",
+   "executionRoleArn": "arn:aws:iam::722049142242:role/ecsTaskExecutionRole",
+   "taskRoleArn": "arn:aws:iam::722049142242:role/LAMPStack-LAMPRole-TGTC7F0PBDOG",
+   "family": "lamp",
+   "memory": "512",
+   "networkMode": "awsvpc",
+   "requiresCompatibilities": [ 
+       "FARGATE" 
+    ]
+}

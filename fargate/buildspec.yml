@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 722049142242.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t lamp . --build-arg CACHE_BUST=$(date +%s) --cache-from 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
+      - docker tag lamp:latest 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:v$CODEBUILD_BUILD_NUMBER
+      - docker tag lamp:latest 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
+      - docker push 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:v$CODEBUILD_BUILD_NUMBER
+      - echo Writing image definitions file...
+      - echo '[{"name":"fargate-lamp-demonstration","imageUri":"722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest"}]' > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
