@@ -39,32 +39,46 @@ $client = new SecretsManagerClient(['profile' => 'default','version' => '2017-10
 $cmd = "aws secretsmanager get-secret-value --secret-id ${secretName} --region us-east-1";
 $result = shell_exec($cmd);
 $result = json_decode($result, true);
-
+echo "<html>";
+echo "<head>";
+echo '  <title>Octank Demo - EC2</title>';
+echo '  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">';
+echo '  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
+echo '  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
+echo '  <link rel="manifest" href="/site.webmanifest">';
+echo '  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">';
+echo '  <meta name="msapplication-TileColor" content="#da532c">';
+echo '  <meta name="theme-color" content="#ffffff">';
+echo "</head>";
+echo "<body>";
 if (isset($result['SecretString'])) {
-	$secret = $result['SecretString'];
+        $secret = $result['SecretString'];
 } else {
-	$secret = base64_decode($result['SecretBinary']);
+        $secret = base64_decode($result['SecretBinary']);
 }
 $password = json_decode($secret, true)['password'];
 $connection = new mysqli($host, $username, $password, $db_name);
 
 function saveData(){
-	global $connection;
-	$query = "SELECT * FROM test";
+        global $connection;
+        $query = "SELECT * FROM test";
 
-	$result = $connection->query($query);
+        $result = $connection->query($query);
 
-	if ($result->num_rows > 0) {
-		// output data of each row
-		while($row = $result->fetch_assoc()) {
-			echo "id: " . $row["id"]. " - Name: " . $row["name"]. " Email: " . $row["email"] . " Message: " . $row["message"] . "<br>";
-		}
-	} else {
-		echo "0 results";
-	}
+        if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                        echo "id: " . $row["id"]. " - Name: " . $row["name"]. " Email: " . $row["email"] . " Message: " . $row["message"] . "<br>";
+                }
+        } else {
+                echo "<b>0 results</b>";
+        }
 }
 
+echo '  <form action="index.html" class="alt" method="POST">';
+echo '    <input class="alt" value="Go Back" name="submit" type="submit">';
+echo '  </form>';
+echo "</body>";
 $result = saveData();
-echo $result
-?>
-
+echo $result;
+echo "</html>";
