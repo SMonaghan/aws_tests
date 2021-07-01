@@ -39,9 +39,15 @@ $client = new SecretsManagerClient(['profile' => 'default','version' => '2017-10
 $cmd = "aws secretsmanager get-secret-value --secret-id ${secretName} --region us-east-1";
 $result = shell_exec($cmd);
 $result = json_decode($result, true);
+
+if ( getenv('FARGATE') == 'TRUE' ){
+    $html_title = 'Octank Demo - Fargate (Get Data)';
+} else {
+    $html_title = 'Octank Demo - EC2 (Get Data)';
+}
 echo "<html>";
 echo "<head>";
-echo '  <title>Octank Demo - Get Data</title>';
+echo "  <title>" . $html_title . "</title>";
 echo '  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">';
 echo '  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
 echo '  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';

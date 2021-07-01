@@ -71,16 +71,18 @@ function saveData($name, $email, $message) {
     }
 }
 
-if ($_ENV['FARGATE'] == 'TRUE'){
+if ( getenv('FARGATE') == 'TRUE' ){
     $log_file = 'php://stdout';
     $open_type = 'w';
     $html_title = 'Octank Demo - Fargate (Submit)';
+    $comment = '<!-- FARGATE -->';
     // echo "docker!!\n\n";
 } else {
     // echo "Not docker!!\n\n";
     $log_file = 'log.log';
     $open_type = 'a';
     $html_title = 'Octank Demo - EC2 (Submit)';
+    $comment = '<!-- EC2 -->';
 }
 echo "<html>";
 echo "<head>";
@@ -92,6 +94,7 @@ echo '  <link rel="manifest" href="/site.webmanifest">';
 echo '  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">';
 echo '  <meta name="msapplication-TileColor" content="#da532c">';
 echo '  <meta name="theme-color" content="#ffffff">';
+echo $comment
 echo "</head>";
 echo "<body>";
 if( isset($_POST['submit'])){
