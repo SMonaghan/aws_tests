@@ -70,9 +70,18 @@ function saveData($name, $email, $message) {
         return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
     }
 }
+if (file_exists('/.dockerenv')){
+    $log_file = 'php://stdout';
+    $open_type = 'w';
+    $html_title = 'Octank Demo - Fargate (Submit)';
+} else {
+    $log_file = 'log.log';
+    $open_type = 'a';
+    $html_title = 'Octank Demo - EC2 (Submit)';
+}
 echo "<html>";
 echo "<head>";
-echo '  <title>Octank Demo - Submit</title>';
+echo "  <title>" . $html_title . "</title>";
 echo '  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">';
 echo '  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
 echo '  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
@@ -92,13 +101,6 @@ if( isset($_POST['submit'])){
     echo $result;
 } else{
     echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
-}
-if (file_exists('/.dockerenv')){
-    $log_file = 'php://stdout';
-    $open_type = 'w';
-} else {
-    $log_file = 'log.log';
-    $open_type = 'a';
 }
 $myfile = fopen($log_file, $open_type) or die("Unable to open file!");
 echo '  <form action="/" class="alt" method="POST">';
