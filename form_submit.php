@@ -71,7 +71,7 @@ function saveData($name, $email, $message) {
     }
 }
 
-if (file_exists('/.dockerenv')){
+if ($_ENV['FARGATE'] == 'TRUE'){
     $log_file = 'php://stdout';
     $open_type = 'w';
     $html_title = 'Octank Demo - Fargate (Submit)';

@@ -26,6 +26,12 @@
                "hostPort": 80,
                "protocol": "tcp"
             }
+         ],
+         "environment": [
+            {
+              "name": "FARGATE",
+              "value": "TRUE"
+            }
          ]
       }
    ],
