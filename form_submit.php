@@ -70,11 +70,14 @@ function saveData($name, $email, $message) {
         return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
     }
 }
+
 if (file_exists('/.dockerenv')){
     $log_file = 'php://stdout';
     $open_type = 'w';
     $html_title = 'Octank Demo - Fargate (Submit)';
+    // echo "docker!!\n\n";
 } else {
+    // echo "Not docker!!\n\n";
     $log_file = 'log.log';
     $open_type = 'a';
     $html_title = 'Octank Demo - EC2 (Submit)';
@@ -102,7 +105,7 @@ if( isset($_POST['submit'])){
 } else{
     echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
 }
-$myfile = fopen($log_file, $open_type) or die("Unable to open file!");
+
 echo '  <form action="/" class="alt" method="POST">';
 echo '    <input class="alt" value="Go Back" name="go-back" type="submit">';
 echo '  </form>';
@@ -111,6 +114,7 @@ echo '    <input class="alt" value="See Submitted Data" name="see-data" type="su
 echo '  </form>';
 echo "</body>";
 echo '</html>';
+$myfile = fopen($log_file, $open_type) or die("Unable to open file! " . $html_title);
 date_default_timezone_set("UTC");
 $txt = date("Y-m-d H:i:s") . " Inserting Name: ${name} Email: ${email} with Message: ${message} into database\n";
 fwrite($myfile, $txt);
