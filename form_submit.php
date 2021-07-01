@@ -70,7 +70,7 @@ function saveData($name, $email, $message) {
         return '<h3 style="text-align:center;">We will get back to you very shortly!  Thanks!</h3>';
     }
 }
-echo $comment
+
 if ( getenv('FARGATE') == 'TRUE' ){
     $log_file = 'php://stdout';
     $open_type = 'w';
@@ -94,6 +94,7 @@ echo '  <link rel="manifest" href="/site.webmanifest">';
 echo '  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">';
 echo '  <meta name="msapplication-TileColor" content="#da532c">';
 echo '  <meta name="theme-color" content="#ffffff">';
+echo $comment
 echo "</head>";
 echo "<body>";
 if( isset($_POST['submit'])){
