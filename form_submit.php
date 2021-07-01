@@ -74,7 +74,7 @@ function saveData($name, $email, $message) {
 if ( getenv('FARGATE') == 'TRUE' ){
     $log_file = 'php://stdout';
     $open_type = 'w';
-    $html_title = 'Octank Demo - Fargate (Submit v1)';
+    $html_title = 'Octank Demo - Fargate (Submit)';
     $comment = '<!-- FARGATE -->';
     // echo "docker!!\n\n";
 } else {

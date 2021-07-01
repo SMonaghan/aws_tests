@@ -41,7 +41,7 @@ $result = shell_exec($cmd);
 $result = json_decode($result, true);
 
 if ( getenv('FARGATE') == 'TRUE' ){
-    $html_title = 'Octank Demo - Fargate (Get Datav1)';
+    $html_title = 'Octank Demo - Fargate (Get Data)';
 } else {
     $html_title = 'Octank Demo - EC2 (Get Data)';
 }
