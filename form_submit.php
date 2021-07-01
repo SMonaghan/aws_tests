@@ -83,7 +83,14 @@ echo $result;
 else{
 echo '<h3 style="text-align:center;">A very detailed error message ( ͡° ͜ʖ ͡°)</h3>';
 }
-$myfile = fopen("log.log", "a") or die("Unable to open file!");
+if (file_exists('/.dockerenv')){
+    $log_file = 'php://stdout'
+    $open_type = 'w'
+} else {
+    $log_file = 'log.log'
+    $open_type = 'a'
+}
+$myfile = fopen($log_file, $open_type) or die("Unable to open file!");
 date_default_timezone_set("UTC");
 $txt = date("Y-m-d H:i:s") . " Inserting Name: ${name} Email: ${email} with Message: ${message} into database\n";
 fwrite($myfile, $txt);
