@@ -1,3 +1,4 @@
+ARG CACHE_BUST_DAY
 FROM public.ecr.aws/amazonlinux/amazonlinux:latest
 ENV HOME='/root'
 RUN yum install amazon-cloudwatch-agent -y
@@ -5,6 +6,8 @@ RUN yum install -y aws-cfn-bootstrap
 RUN yum install httpd mariadb jq php php-mysql git -y
 RUN /usr/bin/amazon-linux-extras install php7.2
 RUN yum install php-xml* awscli -y
+ARG CACHE_BUST_DAY
+RUN yum update -y
 ARG CACHE_BUST
 RUN git clone https://github.com/SMonaghan/aws_tests.git ~/code
 RUN /root/code/composer_install.sh

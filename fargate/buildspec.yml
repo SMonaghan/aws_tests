@@ -5,11 +5,12 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 722049142242.dkr.ecr.us-east-1.amazonaws.com
+      - docker pull 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest || true
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t lamp . --build-arg CACHE_BUST=$(date +%s) --cache-from 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
+      - docker build -t lamp . --build-arg CACHE_BUST=$(date +%s) --build-arg CACHE_BUST_DAY=$(date +%D) --cache-from 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
       - docker tag lamp:latest 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:v$CODEBUILD_BUILD_NUMBER
       - docker tag lamp:latest 722049142242.dkr.ecr.us-east-1.amazonaws.com/lamp:latest
   post_build:
