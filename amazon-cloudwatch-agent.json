@@ -120,6 +120,12 @@
                 "log_group_name": "log.log",
                 "log_stream_name": "log.log",
                 "timezone": "UTC"
+              },
+              {
+                "file_path": "/var/log/secure",
+                "log_group_name": "/var/log/",
+                "log_stream_name": "secure",
+                "timezone": "UTC"
               }
             ]
           }
